@@ -32,14 +32,14 @@ def fetch_price(coin_pair, time_):
    pre_ =df_[:24]
    pre_mean= pre_['price'].mean()
    predict_ = df_[26:]
-   predict_mean = round(predict_['price'].mean(),)
+   predict_mean = round(predict_['price'].mean(),4)
    last_std = round(pre_['price'].std())
    last_closing_price = round(df_['price'].iloc[23],4)
    zscore =getzscore(last_std, last_closing_price, pre_mean  )
    #plot_ =plotly_create.prediction_plot(df_, predict_mean, coin_pair, time_)
    #violin_plot = plotly_create.violin_plot(df_5m,df_15m,df_30m,df_1h)
    last_closing_price = round(df_['price'].iloc[23],4)
-   difference =round((100*(1-(last_closing_price/ predict_mean))),2)
+   difference =round((100*(1-(last_closing_price/ predict_mean))),4)
    plot_ =plotly_create.prediction_plot(df_, predict_mean, coin_pair, time_)
    #violin_plot = plotly_create.violin_plot(df_5m,df_15m,df_30m,df_1h,close_price =last_closing_price,predicted_price=predict_mean)
    violin_plot =plotly_create.violin_plot(df_5m,df_15m,df_30m,df_1h,close_price=last_closing_price, predicted_price=predict_mean)
@@ -60,7 +60,7 @@ def fetch_price(coin_pair, time_):
 
 
 
-@app.route('/')
+#@app.route('/home')
 def route_create():
    
    coins_ = ['BTCUSD', 'ADAUSD', 'DOGEUSD', 'ETHUSD','LTCUSD','MATICUSD','SHIBUSD','SOLUSD','XRPUSD']
@@ -141,7 +141,12 @@ def route_create():
 
    diff_dict ={'BTCUSD_5m':BTCUSD_5m_diff,'BTCUSD_15m':BTCUSD_15m_diff,'BTCUSD_30m':BTCUSD_30m_diff,'BTCUSD_1h':BTCUSD_1h_diff, 'ADAUSD_5m':ADAUSD_5m_diff,'ADAUSD_15m':ADAUSD_15m_diff,'ADAUSD_30m':ADAUSD_30m_diff,'ADAUSD_1h':ADAUSD_1h_diff, 'DOGEUSD_5m':DOGEUSD_5m_diff,'DOGEUSD_15m':DOGEUSD_15m_diff,'DOGEUSD_30m':DOGEUSD_30m_diff,'DOGEUSD_1h':DOGEUSD_1h_diff, 'ETHUSD_5m':ETHUSD_5m_diff,'ETHUSD_15m':ETHUSD_15m_diff, 'ETHUSD_30m':ETHUSD_30m_diff,'ETHUSD_1h':ETHUSD_1h_diff,'LTCUSD_5m':LTCUSD_5m_diff,'LTCUSD_15m':LTCUSD_15m_diff,'LTCUSD_30m':LTCUSD_30m_diff,'LTCUSD_1h':LTCUSD_1h_diff, 'MATICUSD_5m':MATICUSD_5m_diff, 'MATICUSD_15m':MATICUSD_15m_diff,'MATICUSD_30m':MATICUSD_30m_diff,'MATICUSD_1h':MATICUSD_1h_diff, 'SHIBUSD_5m':SHIBUSD_1h_diff,'SHIBUSD_15m':SHIBUSD_15m_diff,'SHIBUSD_30m':SHIBUSD_30m_diff,'SHIBUSD_1h':SHIBUSD_1h_diff,'SOLUSD_5m':SOLUSD_5m_diff,'SOLUSD_15m':SOLUSD_15m_diff,'SOLUSD_30m':SOLUSD_30m_diff,'SOLUSD_1h':SOLUSD_1h_diff }
    return diff_dict
-   return render_template('index.html', diff_dict=diff_dict)
+  # return render_template('index.html', diff_dict=diff_dict)
+@app.route('/')
+def home_page():
+   diff_dict =route_create()
+
+   return render_template('home.html', diff_dict=diff_dict)
 
 @app.route('/coin/<coin_pair>/<time_>')
 def coin_(coin_pair,time_):
@@ -170,3 +175,7 @@ def how_to():
 #@app.route('/coin/<coin_pair>')
 #def main_coin(coin_pair):
 #   return render_template("plotly.html", context=context,last_closing_price = last_closing_price,prediction_mean=prediction_mean)
+@app.errorhandler(404)
+def page_not_found(e):
+   
+    return render_template('error-404.html'), 404

@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+{% block script %}
+<!-- 
+put your custom script or styling here
+
+-->
+{% endblock script %}
+
+
+{% block my_content %}
+
+<div class="container-fluid" style="background-color: #111111;">
+<main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" >
+    <h1 class='text-center' style="color:white; ">CoinProphet</h1>
+    <h2  class='text-center' style="color:white; padding-top: 25px;" > CoinProphet uses a LSTM Neural Network to estimate the best price point for crypto currency closing prices for the next 24 periods.</h2>
+    <h4  class='text-center' style="color:white; padding-top: 25px;"> Predicted Prices are the Neural Network's best estimate for prices in the future. CoinProphet doesn't try to predict the variance of prices as much as it gives it's best estimation of where a price could be in the future. </h4>
+    <h4  class='text-center' style="color:white; padding-top: 25px;"> To get started select a crypto currency from the left tab.  </h4>
+</main>
+</div>
+{% endblock my_content %}
