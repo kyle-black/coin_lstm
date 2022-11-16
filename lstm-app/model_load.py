@@ -2,7 +2,7 @@
 import tensorflow as tf
 from tensorflow import keras
 
-#print(tf.version.VERSION)
+
 
 
 import os
@@ -15,12 +15,12 @@ import tensorflow as tf
 #from cryptowatch1 import BTCUSD
 import cryptowatch1
 from sklearn.preprocessing import StandardScaler
-#from model_train import import_df
+
 from datetime import datetime
 from statistics import mean
 
 
-#BTCUSD =cryptowatch1.get_ohlc('BTCUSD','30m')
+
 def import_df(df_):
 
     df_['change'] = df_['close'].pct_change(periods =24)
@@ -34,8 +34,7 @@ def import_df(df_):
     scaler = StandardScaler()
 
 
-    #plot_cols =['time', 'open','high','low','close','vol_','volume', 'RSI', 'MACD','macsignal', 'macdhist', 'ADX', 
-    #'Aroon', 'Trendmode', 'AD', 'ADOSC', 'OBV', 'NATR', 'TRANGE'] 
+   
     plot_cols = ['time', 'change','change_price','open', 'high', 'low', 'close', 'vol_', 'volume', 'RSI', 'MACD',
        'macsignal', 'macdhist', 'ADX', 'Aroon', 'Trendmode', 'AD', 'ADOSC',
        'OBV', 'NATR', 'TRANGE','TWO_CROWS','THREE_BLACK_CROWS','THREE_INSIDE_UP_DOWN','CDL_3_LINE_STRIKE','CDL_3_OUTSIDE',
@@ -65,9 +64,7 @@ def import_df(df_):
     column_indicies = {name: i for i, name in enumerate(df1.columns)}
 
     n =len(df1)
-    #print(df1)
-    #print(n)
-    
+  
     train_df =df1[0:int(n*0.7)]
    # print(train_df)
     val_df = df1[int(n*0.7): int(n*0.9)]
@@ -102,24 +99,20 @@ def import_df(df_):
     val_df_cat = val_df[cat_cols]
     val_df_cat.reset_index(inplace=True)
     val_df = val_df_scaled.merge(val_df_cat, left_index=True, right_index=True)
-   # print(val_df)
+   
     
     test_df_scaled =pd.DataFrame(scaler.fit_transform(test_df[scaled_cols]), columns =scaled_cols )
     test_df_cat = test_df[cat_cols]
     test_df_cat.reset_index(inplace=True)
-    #test_df = pd.concat([test_df_scaled,test_df_cat ])
+  
     test_df = test_df_scaled.merge(test_df_cat, left_index=True, right_index=True)
 
     predict_df_scaled =pd.DataFrame(scaler.fit_transform(predict_df[scaled_cols]), columns =scaled_cols )
     predict_df_cat = predict_df[cat_cols]
     predict_df_cat.reset_index(inplace=True)
-    #predict_df = pd.concat([predict_df_scaled,predict_df_cat ])
+   
     predict_df = predict_df_scaled.merge(predict_df_cat, left_index=True, right_index=True)
-   # predict_df.drop(columns=['time'], axis=1, inplace=True)
-   # predict_df['time'] = predict_time
-    #print(predict_df.columns)
-    #print('df:',predict_df)
-    #print('time:',len(predict_time) )
+   
     return train_df, val_df, test_df, predict_df, scaler , predict_mean, predict_std, train_mean, train_std
 
 
@@ -131,15 +124,7 @@ def create_time(df_, interval):
 
 
 def make_predict(coin,model,interval):
-    #scaler = StandardScaler()
-    #coin['change'] = coin['close'].pct_change(periods =24)
-    #coin = coin.iloc[: , :]
-    #coin= coin.dropna()
-   
     
-    #coin_price = coin[:]
-    #df =BTCUSD[:-23]
-    #coin_p =coin[-24:]
     train_df, val_df, test_df, predict_df, scaler, predict_mean,predict_std, train_mean,train_std = import_df(coin)
     
     
@@ -151,11 +136,10 @@ def make_predict(coin,model,interval):
     #print('coin p:', np.array(coin_p))
     x= model.predict(np.array([coin_p,]))
     x =x[0][0:24,0]
-   # x= np.argmax(x)
+  
     coin_p['time'] 
 
-    #print('inputs:',coin_p)
-    #print('predictions:',)
+    
     prediction = x * predict_std['close'] + predict_mean['close']
     last_price = last_price * train_std['close'] +train_mean['close']
     coin_p = coin_p * predict_std + predict_mean
@@ -163,11 +147,7 @@ def make_predict(coin,model,interval):
     predict_df['new_time'] = predict_df['time'] #* predict_std['time'] + predict_mean['time']
     #predict_df = predict_df['new_time']
     time_ =create_time(predict_df, interval)
-    #time_ = time_ * train_std['time'] + train_mean['time']
-    #coin_p = x * train_std['change'] + train_mean['change']
-    #prediction_change = prediction
-    #print(last_price)
-    #print(time_)
+   
     
     return  prediction, coin_p, last_price, time_
     
@@ -176,10 +156,7 @@ def make_predict(coin,model,interval):
 
 
 
-########### Model Loads #########
-#BTCUSD_5_m = tf.keras.models.load_model('models/BTCUSD/BTCUSD_5_m.h5')
-BTCUSD_30_m = tf.keras.models.load_model('models/BTCUSD/BTCUSD_30m_LSTM.h5')
-#BTCUSD_1_h = tf.keras.models.load_model('models/BTCUSD/BTCUSD_1_h.h5')
+
 #################################
 ############# Predictions #######
 ####### BTCUSD ##################
@@ -216,14 +193,10 @@ def get_coin(pair, time):
 
 
 #################################
-#get_coin('BTCUSD', '30m')
-#get_coin('LTCUSD', '30m')
-#get_coin('MATICUSD','30m')
-#BTCUSD =cryptowatch1.get_ohlc('BTCUSD','30m')
+)
 
 asset_list=['ADAUSD','BTCUSD','DOGEUSD', 'ETHUSD',  'HFTUSD','LTCUSD', 'MATICUSD','SHIBUSD', 'SOLUSD', 'XRPUSD']
 
-#asset_list=['BTCUSD']
 for i in asset_list:
     try:
         get_coin(i,'5m')
@@ -233,24 +206,4 @@ for i in asset_list:
     except: print('not available')
 
 
-#get_coin('BTCUSD','30m')
-'''
-def run_models():
 
-    def five_m():
-        for i in asset_list:
-            get_coin(i, '5m')
-    def fifteen_m():
-        for i in asset_list:
-            get_coin(i, '15m')
-    def thirty_m():
-        for i in asset_list:
-            get_coin(i, '30m')
-    def sixty_m():
-        for i in asset_list:
-            get_coin()
-    
-    
-    schedule.every(5).minutes.do(five_m)
-    get_coin
-'''

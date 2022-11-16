@@ -33,7 +33,7 @@ def fetch_price(coin_pair, time_):
    pre_mean= pre_['price'].mean()
    predict_ = df_[26:]
    predict_mean = round(predict_['price'].mean(),4)
-   last_std = round(pre_['price'].std())
+   last_std = pre_['price'].std()
    last_closing_price = round(df_['price'].iloc[23],4)
    zscore =getzscore(last_std, last_closing_price, pre_mean  )
    #plot_ =plotly_create.prediction_plot(df_, predict_mean, coin_pair, time_)
