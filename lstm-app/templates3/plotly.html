@@ -1,0 +1,160 @@
+{% extends "index5.html" %}
+{% block script %}
+<!-- 
+put your custom script or styling here
+
+-->
+{% endblock script %}
+
+
+{% block my_content %}
+<span id='ct' style="padding-left: 80px; color:white" ></span>
+<!-- Plotly plot placeholder -->
+<div class="container-fluid">
+    <div class="row" style="padding-left: 80px;">
+        <!--<div class="col"> -->
+        
+    
+       <!-- <div class="row"> -->
+            <!-- Placeholder for global-time series -->
+            <div id="plotly-timeseries"></div>
+       <!-- </div> -->
+    </div>
+</div>
+
+<div class="row" style="padding-left: 80px; padding-top:80px; padding-right:80px;">
+    <div class="col-sm" >
+        
+        <div class="small-box" style="background-color: #2b5698;">
+            <div class="inner">
+             
+
+                <p style="color:white">Last Closing Price</p>
+                <h3 style="color:white">$ {{last_closing_price}}</h3>
+            </div>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-sm">
+        <!-- small box -->
+        <div class="small-box " style="background-color: #6efafd;">
+            <div class="inner">
+            <!--    <h3>{{context.total_all_recovered}}<sup style="font-size: 20px"></sup></h3> -->
+
+            <p>Mean Predicted Price</p>
+            <h3>$ {{prediction_mean}} </h3>
+
+            </div>
+        </div>
+    </div>
+    <!-- ./col -->
+    <!-- ./col -->
+    {% if difference < 0 %}
+    <div class="col-sm">
+        <!-- small box -->
+        <div class="small-box" style="background-color:#982f2b;">
+            <div class="inner">
+            <!--    <h3>{{context.total_all_deaths}}</h3> -->
+
+                <p style="color:white" >Closing Price to Mean Predicted Price Diff</p>
+                <h3 style="color:white">{{difference}} %</h3>
+
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-sm">
+        <!-- small box -->
+        <div class="small-box" style="background-color:#228a30;">
+            <div class="inner">
+            <!--    <h3>{{context.total_all_deaths}}</h3> -->
+
+                <p style="color:white">Closing Price to Mean Predicted Price Diff</p>
+                <h3 style="color:white">{{difference}} %</h3>
+
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+    <!-- ./col -->
+    <div class="container-fluid">
+        <div class="col" style="padding-left: 0px;">
+            <!--<div class="col"> -->
+            
+        
+           <!-- <div class="row"> -->
+                <!-- Placeholder for global-time series -->
+                <div id="plotly-violin"></div>
+           <!-- </div> -->
+        </div>
+    </div>
+</div>
+    <div class="container-fluid">
+        <div class="col" style="padding-left: 80px;">
+        <!--<div class="col"> -->
+            {% if zscore < -1 and difference > 1 %}
+            <div class="row">
+                <h1 style="color:white">Coin Prophet's Advice: <h1 style="color:#228a30">&nbsp;&nbsp;Buy</h1></h1>
+                
+            </div>
+            {% elif zscore > 1 and difference > 0 %}
+            <div class="row">
+                <h1 style="color:white">Coin Prophet's Advice: <h1 style="color:#c43c37">&nbsp;&nbsp;Sell</h1></h1>
+                
+            </div>
+            {% else %}
+            <div class="row">
+                <h1 style="color:white">Coin Prophet's Advice: <h1 style="color:#c7c0c0">&nbsp;&nbsp;Hold</h1></h1>
+                
+            </div>
+            {% endif %}
+
+
+           
+            <p style="color:white">Over the next 24 hours Coin Prophet's nerual network expects the average predicted price to be {{difference}}% higher. </p>
+            <p style="color:white"> The last closing price is $ {{last_closing_price}}.</p>
+            {% if zscore < 0 %}
+                <p style="color:white"> This is {{zscore}} standard devitions below the mean previous closing prices. (z-score)</p>
+            {% elif zscore > 0  %}
+                <p style="color:white"> This is {{zscore}} standard devitions above the mean previous closing prices. (z-score)</p>
+            {% endif %}
+
+            {% if zscore < -1 and difference > 1 %}
+                <p style="color:white"> Based on the neural network and the last closed zscore, Coin Prophet suggests buying the asset.</p>
+
+            {% elif zscore > 1 and difference > 0 %}
+                <p style="color:white"> Based on the neural network and the last closed zscore, Coin Prophet suggests buying the asset.</p>
+            {% else %}
+                <p style="color:white"> Based on the neural network and the last closed zscore, Coin Prophet suggests holding your current position as there isn't a strong enough indication of buy or sell.</p>
+            {% endif %}
+
+
+       <!-- <div class="row"> -->
+            <!-- Placeholder for global-time series -->
+            
+       <!-- </div> -->
+    </div>
+    </div>
+</div>
+
+<!-- Script to execute the Json ( we can create it also with looping) -->
+<script>
+    //Parse your Json variable here
+    var graphs = {{ context.PLOT | safe }};
+    Plotly.plot('plotly-timeseries', graphs, {});
+    
+</script>
+<script>
+    //Parse your Json variable here
+    //var graphs = {{ context.plot_global_cases_per_country | safe }};
+    //Plotly.plot('plotly-global', graphs, {});
+    var graphs = {{ context2.PLOT2 | safe }};
+    Plotly.plot('plotly-violin', graphs, {});
+</script>
+<script>
+    //Parse your Json variable here
+    //var graphs = {{ context.plot_global_time_series | safe }};
+    //Plotly.plot('plotly-timeseries', graphs, {});
+</script>
+{% endblock my_content %}

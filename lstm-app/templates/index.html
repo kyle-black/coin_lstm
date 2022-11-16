@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <title>CoinProphet | LSTM Neural Network</title>
+    <!-- Custom CSS -->
+    <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ url_for( 'static', filename='matrix/dist/css/style.min.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 48
+    }
+    </style>
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar" data-navbarbg="skin5">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin5">
+                    <!-- This is for the sidebar toggle which is visible on mobile only -->
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <a class="navbar-brand" href="index.html">
+                        <!-- Logo icon -->
+                       
+                        <!--End Logo icon -->
+                         <!-- Logo text -->
+                       
+                        <!-- Logo icon -->
+                        <!-- <b class="logo-icon"> -->
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <!-- <img src="assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
+                            
+                        <!-- </b> -->
+                        <!--End Logo icon -->
+                    </a>
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- Toggle which is visible on mobile only -->
+                    <!-- ============================================================== -->
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-left mr-auto">
+                        <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
+                        <!-- ============================================================== -->
+                        <!-- create new -->
+                        <!-- ============================================================== -->
+                       
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                       
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- Right side toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-right">
+                        <!-- ============================================================== -->
+                        <!-- Comment -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i>
+                            </a>
+                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- End Comment -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- Messages -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="font-24 mdi mdi-comment-processing"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
+                                <ul class="list-style-none">
+                                    <li>
+                                        <div class="">
+                                             <!-- Message -->
+                                            <a href="javascript:void(0)" class="link border-top">
+                                                <div class="d-flex no-block align-items-center p-10">
+                                                    <span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
+                                                    <div class="m-l-10">
+                                                        <h5 class="m-b-0">Event today</h5> 
+                                                        <span class="mail-desc">Just a reminder that event</span> 
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="link border-top">
+                                                <div class="d-flex no-block align-items-center p-10">
+                                                    <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
+                                                    <div class="m-l-10">
+                                                        <h5 class="m-b-0">Settings</h5> 
+                                                        <span class="mail-desc">You can customize this template</span> 
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="link border-top">
+                                                <div class="d-flex no-block align-items-center p-10">
+                                                    <span class="btn btn-primary btn-circle"><i class="ti-user"></i></span>
+                                                    <div class="m-l-10">
+                                                        <h5 class="m-b-0">Pavan kumar</h5> 
+                                                        <span class="mail-desc">Just see the my admin!</span> 
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="link border-top">
+                                                <div class="d-flex no-block align-items-center p-10">
+                                                    <span class="btn btn-danger btn-circle"><i class="fa fa-link"></i></span>
+                                                    <div class="m-l-10">
+                                                        <h5 class="m-b-0">Luanch Admin</h5> 
+                                                        <span class="mail-desc">Just see the my new admin!</span> 
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- End Messages -->
+                        <!-- ============================================================== -->
+
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                       
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar" data-sidebarbg="skin5">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav" class="p-t-30">
+                        
+                        
+                      
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="material-symbols-outlined">currency_bitcoin</i><span class="hide-menu">Crypto Currency</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="material-symbols-outlined">list</i><span class="hide-menu">Bitcoin</span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        {% if diff_dict['BTCUSD_5m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='BTCUSD',time_='5m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> BTCUSD 5m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='BTCUSD',time_='5m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> BTCUSD 5m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['BTCUSD_15m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='BTCUSD',time_='15m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> BTCUSD 15m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='BTCUSD',time_='15m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> BTCUSD 15m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['BTCUSD_30m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='BTCUSD',time_='15m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> BTCUSD 30m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='BTCUSD',time_='15m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> BTCUSD 30m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['BTCUSD_1h'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='BTCUSD',time_='1h') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> BTCUSD 1h </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='BTCUSD',time_='1h') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> BTCUSD 1h </span></a></li>
+                                        {% endif %}
+
+
+                                    
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="material-symbols-outlined">list</i><span class="hide-menu">Ethereum</span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        {% if diff_dict['ETHUSD_5m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='ETHUSD',time_='5m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> ETHUSD 5m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='ETHUSD',time_='5m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> ETHUSD 5m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['ETHUSD_15m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='ETHUSD',time_='15m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> ETHUSD 15m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='ETHUSD',time_='15m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> ETHUSD 15m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['ETHUSD_30m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='ETHUSD',time_='15m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> ETHUSD 30m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='ETHUSD',time_='15m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> ETHUSD 30m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['ETHUSD_1h'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='ETHUSD',time_='1h') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> ETHUSD 1h </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='ETHUSD',time_='1h') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> ETHUSD 1h </span></a></li>
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="material-symbols-outlined">list</i><span class="hide-menu">Litecoin</span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        {% if diff_dict['LTCUSD_5m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='LTCUSD',time_='5m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> LTCUSD 5m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='LTCUSD',time_='5m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> LTCUSD 5m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['LTCUSD_15m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='LTCUSD',time_='15m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> LTCUSD 15m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='LTCUSD',time_='15m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> LTCUSD 15m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['LTCUSD_30m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='LTCUSD',time_='15m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> LTCUSD 30m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='LTCUSD',time_='15m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> LTCUSD 30m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['LTCUSD_1h'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='LTCUSD',time_='1h') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> LTCUSD 1h </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='LTCUSD',time_='1h') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> LTCUSD 1h </span></a></li>
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="material-symbols-outlined">list</i><span class="hide-menu">Dogecoin</span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        {% if diff_dict['DOGEUSD_5m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='DOGEUSD',time_='5m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> DOGEUSD 5m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='DOGEUSD',time_='5m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> DOGEUSD 5m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['DOGEUSD_15m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='DOGEUSD',time_='15m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> DOGEUSD 15m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='DOGEUSD',time_='15m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> DOGEUSD 15m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['DOGEUSD_30m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='DOGEUSD',time_='15m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> DOGEUSD 30m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='DOGEUSD',time_='15m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> DOGEUSD 30m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['DOGEUSD_1h'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='DOGEUSD',time_='1h') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> DOGEUSD 1h </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='DOGEUSD',time_='1h') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> DOGEUSD 1h </span></a></li>
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="material-symbols-outlined">list</i><span class="hide-menu">Matic (Polygon) </span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        {% if diff_dict['MATICUSD_5m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='MATICUSD',time_='5m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> MATICUSD 5m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='MATICUSD',time_='5m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> MATICUSD 5m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['MATICUSD_15m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='MATICUSD',time_='15m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> MATICUSD 15m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='MATICUSD',time_='15m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> MATICUSD 15m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['MATICUSD_30m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='MATICUSD',time_='15m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> MATICUSD 30m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='MATICUSD',time_='15m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> MATICUSD 30m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['MATICUSD_1h'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='MATICUSD',time_='1h') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> MATICUSD 1h </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='MATICUSD',time_='1h') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> MATICUSD 1h </span></a></li>
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="material-symbols-outlined">list</i><span class="hide-menu">Cardano</span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        {% if diff_dict['ADAUSD_5m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='ADAUSD',time_='5m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> ADAUSD 5m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='ADAUSD',time_='5m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> ADAUSD 5m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['ADAUSD_15m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='ADAUSD',time_='15m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> ADAUSD 15m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='ADAUSD',time_='15m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> ADAUSD 15m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['ADAUSD_30m'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='ADAUSD',time_='15m') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> ADAUSD 30m </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='ADAUSD',time_='15m') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> ADAUSD 30m </span></a></li>
+                                        {% endif %}
+                                        {% if diff_dict['ADAUSD_1h'] > 0 %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='ADAUSD',time_='1h') }}" class="sidebar-link"><i style="color:green" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> ADAUSD 1h </span></a></li>
+                                        {% else %}
+                                        <li class="sidebar-item"><a href="{{ url_for('coin_',coin_pair='ADAUSD',time_='1h') }}" class="sidebar-link"><i style="color:red" class="material-symbols-outlined">fiber_manual_record</i><span class="hide-menu"> ADAUSD 1h </span></a></li>
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                               
+                               
+                               
+                            </ul>
+                        </li>
+                       
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="material-symbols-outlined">Help</i><span class="hide-menu">What is this?</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="{{ url_for('how_to') }}" class="sidebar-link"><i class="mdi mdi-pencil"></i><span class="hide-menu"> Methodology </span></a></li>
+                                <li class="sidebar-item"><a href="icon-fontawesome.html" class="sidebar-link"><i class="mdi mdi-emoticon-cool"></i><span class="hide-menu"> Font Awesome Icons </span></a></li>
+                            </ul>
+                        </li>
+                        
+                       
+                       
+                       
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-elements.html" aria-expanded="false"><i class="mdi mdi-pencil"></i><span class="hide-menu">Elements</span></a></li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+             
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid" style="background-color: #111111;">
+                <!-- ============================================================== -->
+                <!-- Sales Cards  -->
+                <!-- ============================================================== -->
+               
+                {% block my_content %}
+                {% endblock my_content %}
+                <!-- ============================================================== -->
+                <!-- Recent comment and chats -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer text-center">
+                <p>Designed and Developed by Kyle Black</p> 
+                 <p>email: kpblack87@gmail.com</p>  
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="{{ url_for('static', filename= 'matrix/assets/libs/jquery/dist/jquery.min.js')}}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="{{ url_for ( 'static', filename ='matrix/assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>
+    <script src="{{ url_for ('static', filename= 'matrix/assets/libs/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <script src="{{ url_for ('static', filename= 'matrix/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js')}}"></script>
+    <script src="{{ url_for ('static',filename= 'matrix/assets/extra-libs/sparkline/sparkline.js')}}"></script>
+    <!--Wave Effects -->
+    <script src="{{ url_for ('static',filename='matrix/dist/js/waves.js')}}"></script>
+    <!--Menu sidebar -->
+    <script src="{{ url_for ( 'static', filename='matrix/dist/js/sidebarmenu.js')}}"></script>
+    <!--Custom JavaScript -->
+    <script src="{{ url_for ( 'static', filename='matrix/dist/js/custom.min.js')}}"></script>
+    <!--This page JavaScript -->
+    <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
+    <!-- Charts js Files -->
+    
+
+</body>
+
+</html>

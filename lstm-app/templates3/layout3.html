@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<title>Introduction | AdminLTE v3.2 Documentation</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Introduction" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="AdminLTE v3.2 Documentation" />
+<meta property="og:description" content="AdminLTE v3.2 Documentation" />
+<link rel="canonical" href="https://adminlte.io/docs/3.2/" />
+<meta property="og:url" content="https://adminlte.io/docs/3.2/" />
+<meta property="og:site_name" content="AdminLTE v3.2 Documentation" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Introduction" />
+<script type="application/ld+json">
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script> 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css"> 
+
+
+{"headline":"Introduction","url":"https://adminlte.io/docs/3.2/","@type":"WebSite","description":"AdminLTE v3.2 Documentation","name":"AdminLTE v3.2 Documentation","@context":"https://schema.org"}</script>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+<script nonce="8af7ae9a-a48e-4e09-8521-fbf500489e26">(function(w,d){!function(e,f,g,h){e.zarazData=e.zarazData||{};e.zarazData.executed=[];e.zaraz={deferred:[],listeners:[]};e.zaraz.q=[];e.zaraz._f=function(i){return function(){var j=Array.prototype.slice.call(arguments);e.zaraz.q.push({m:i,a:j})}};for(const k of["track","set","debug"])e.zaraz[k]=e.zaraz._f(k);e.zaraz.init=()=>{var l=f.getElementsByTagName(h)[0],m=f.createElement(h),n=f.getElementsByTagName("title")[0];n&&(e.zarazData.t=f.getElementsByTagName("title")[0].text);e.zarazData.x=Math.random();e.zarazData.w=e.screen.width;e.zarazData.h=e.screen.height;e.zarazData.j=e.innerHeight;e.zarazData.e=e.innerWidth;e.zarazData.l=e.location.href;e.zarazData.r=f.referrer;e.zarazData.k=e.screen.colorDepth;e.zarazData.n=f.characterSet;e.zarazData.o=(new Date).getTimezoneOffset();if(e.dataLayer)for(const r of Object.entries(Object.entries(dataLayer).reduce(((s,t)=>({...s[1],...t[1]})))))zaraz.set(r[0],r[1],{scope:"page"});e.zarazData.q=[];for(;e.zaraz.q.length;){const u=e.zaraz.q.shift();e.zarazData.q.push(u)}m.defer=!0;for(const v of[localStorage,sessionStorage])Object.keys(v||{}).filter((x=>x.startsWith("_zaraz_"))).forEach((w=>{try{e.zarazData["z_"+w.slice(7)]=JSON.parse(v.getItem(w))}catch{e.zarazData["z_"+w.slice(7)]=v.getItem(w)}}));m.referrerPolicy="origin";m.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(e.zarazData)));l.parentNode.insertBefore(m,l)};["complete","interactive"].includes(f.readyState)?zaraz.init():e.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,0,"script");})(window,document);</script></head>
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
+<div class="wrapper"><div class="preloader flex-column justify-content-center align-items-center">
+<img class="animation__shake" src="/docs/3.2/assets/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+</div>
+<nav class="main-header navbar navbar-expand navbar-light">
+<ul class="navbar-nav">
+<li class="nav-item">
+<a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+</li>
+<li class="nav-item dropdown">
+<a class="nav-link bg-info rounded dropdown-toggle" href="#" id="navbarVersionDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+v3.2
+</a>
+<div class="dropdown-menu py-0" aria-labelledby="navbarVersionDropdown">
+<a class="dropdown-item bg-info disabled" href="#">v3.2</a>
+<a class="dropdown-item" href="https://adminlte.io/docs/3.1/">v3.1</a>
+<a class="dropdown-item" href="https://adminlte.io/docs/3.0/">v3.0</a>
+</div>
+</li>
+</ul>
+<ul class="navbar-nav ml-auto">
+
+<li class="nav-item">
+<div class="theme-switch-wrapper nav-link">
+<label class="theme-switch" for="checkbox">
+<input type="checkbox" id="checkbox" />
+<span class="slider round"></span>
+</label>
+</div>
+</li>
+
+</ul>
+
+
+</nav>
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<a href="/docs/3.2/index.html" class="brand-link logo-switch">
+<img src="/docs/3.2/assets/img/logo-xs.png" alt="AdminLTE Docs Logo Small" class="brand-image-xl logo-xs">
+<img src="/docs/3.2/assets/img/logo-xl.png" alt="AdminLTE Docs Logo Large" class="brand-image-xs logo-xl" style="left: 12px">
+</a>
+<div class="sidebar">
+<div class="form-inline mt-2">
+<div class="input-group" data-widget="sidebar-search">
+<input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+<div class="input-group-append">
+<button class="btn btn-sidebar">
+<i class="fas fa-search fa-fw"></i>
+</button>
+</div>
+</div>
+</div>
+<nav class="mt-2">
+<ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu">
+<li class="nav-item">
+<a href="/docs/3.2/index.html" class="nav-link active">
+<i class="nav-icon fas fa-microchip"></i>
+<p>
+Installation
+</p>
+</a>
+</li>
+<li class="nav-item">
+<a href="/docs/3.2/dependencies.html" class="nav-link">
+<i class="nav-icon fas fa-handshake"></i>
+<p>
+Dependencies & Plugins
+</p>
+</a>
+</li>
+<li class="nav-item">
+<a href="/docs/3.2/layout.html" class="nav-link">
+<i class="nav-icon fas fa-copy"></i>
+<p>
+Layout
+</p>
+</a>
+</li>
+<li class="nav-item">
+<a href="/docs/3.2/components" class="nav-link">
+<i class="nav-icon fas fa-th"></i>
+<p>
+Components
+<i class="right fas fa-angle-left"></i>
+</p>
+</a>
+<ul class="nav nav-treeview">
+<li class="nav-item">
+<a href="/docs/3.2/components/main-header.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Main Header</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/components/main-sidebar.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Main Sidebar</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/components/control-sidebar.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Control Sidebar</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/components/cards.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Card</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/components/boxes.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Small-/ Info-Box</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/components/direct-chat.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Direct Chat</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/components/timeline.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Timeline</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/components/ribbons.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Ribbons</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/components/miscellaneous.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Miscellaneous</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/components/plugins.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Plugins</p>
+</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a href="/docs/3.2/javascript" class="nav-link">
+<i class="nav-icon fas fa-code"></i>
+<p>
+JavaScript
+<i class="right fas fa-angle-left"></i>
+</p>
+</a>
+<ul class="nav nav-treeview">
+<li class="nav-item">
+<a href="/docs/3.2/javascript/layout.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Layout</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/javascript/push-menu.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Push Menu</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/javascript/treeview.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Treeview</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/javascript/card-widget.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Card Widget</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/javascript/card-refresh.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>CardRefresh</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/javascript/control-sidebar.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Control Sidebar</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/javascript/direct-chat.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Direct Chat</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/javascript/todo-list.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Todo List</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/javascript/toasts.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Toasts</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/javascript/sidebar-search.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Sidebar Search</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/javascript/expandable-tables.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Expandable Tables</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/javascript/iframe.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>IFrame</p>
+</a>
+</li><li class="nav-item">
+<a href="/docs/3.2/javascript/navbar-search.html" class="nav-link">
+<i class="far fa-circle nav-icon"></i>
+<p>Navbar Search</p>
+</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a href="/docs/3.2/browser-support.html" class="nav-link">
+<i class="nav-icon fab fa-chrome"></i>
+<p>
+Browser Support
+ </p>
+</a>
+</li>
+<li class="nav-item">
+<a href="/docs/3.2/implementations.html" class="nav-link">
+<i class="nav-icon fas fa-bookmark"></i>
+<p>
+Implementations
+</p>
+</a>
+</li>
+<li class="nav-item">
+<a href="/docs/3.2/additional-styles.html" class="nav-link">
+<i class="nav-icon fas fa-mortar-pestle"></i>
+<p>
+Additional Styles
+</p>
+</a>
+</li>
+<li class="nav-item">
+<a href="/docs/3.2/upgrade-guide.html" class="nav-link">
+<i class="nav-icon fas fa-hand-point-up"></i>
+<p>
+Upgrade Guide
+</p>
+</a>
+</li>
+<li class="nav-item">
+<a href="/docs/3.2/how-to-contribute.html" class="nav-link">
+<i class="nav-icon fas fa-hands-helping"></i>
+<p>
+Contributing Guide
+</p>
+</a>
+</li>
+<li class="nav-item">
+<a href="/docs/3.2/faq.html" class="nav-link">
+<i class="nav-icon fas fa-question-circle"></i>
+<p>
+FAQ
+</p>
+</a>
+</li>
+<li class="nav-item">
+<a href="/docs/3.2/license.html" class="nav-link">
+<i class="nav-icon fas fa-file-contract"></i>
+<p>
+License
+</p>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+<div class="content-wrapper px-4 py-2">
+<div class="content-header">
+<h1>Introduction</h1>
+</div>
+<div class="content px-2">
+<h2 id="quick-start">Quick start</h2>
+<p>There are multiple ways to install AdminLTE.</p>
+<h3 id="download--changelog">Download &amp; Changelog:</h3>
+<p>Always Recommended to download from GitHub latest release <a href="https://github.com/ColorlibHQ/AdminLTE/releases/latest">AdminLTE 3</a> for bug free and latest features.<br />
+Visit the <a href="https://github.com/ColorlibHQ/AdminLTE/releases">releases</a> page to view the changelog.<br />
+Legacy Releases are <a href="https://github.com/ColorlibHQ/AdminLTE/releases/tag/v2.4.18">AdminLTE 2</a> / <a href="https://github.com/ColorlibHQ/AdminLTE/releases/tag/1.3.1">AdminLTE 1</a>.</p>
+<h2 id="stable-release">Stable release</h2>
+<h3 id="grab-from-jsdelivr-cdn">Grab from <a href="https://www.jsdelivr.com/package/npm/admin-lte">jsdelivr</a> CDN:</h3>
+<p><em><strong>Important Note</strong>: You needed to add separately cdn links for plugins in your project.</em></p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff9e9b929691d2938b9abfccd1cd">[email&#160;protected]</a>/dist/js/adminlte.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="18797c75717635746c7d582b362a">[email&#160;protected]</a>/dist/css/adminlte.min.css"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+<h3 id="using-the-command-line">Using The Command Line:</h3>
+<p><em><strong>Important Note</strong>: To install it via npm/Yarn, you need at least Node.js 14 or higher.</em></p>
+<h4 id="via-npm">Via npm</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7110151c181f5c1d051431">[email&#160;protected]</a>^3.2 <span class="nt">--save</span>
+</code></pre></div></div>
+<h4 id="via-yarn">Via Yarn</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5736333a3e397a3b233217">[email&#160;protected]</a>^3.2
+</code></pre></div></div>
+<h4 id="via-composer">Via Composer</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer require <span class="s2">"almasaeed2010/adminlte=~3.2"</span>
+</code></pre></div></div>
+<h4 id="via-git">Via Git</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/ColorlibHQ/AdminLTE.git
+</code></pre></div></div>
+</div>
+</div>
+<footer class="main-footer">
+<div class="float-right d-none d-sm-inline">
+v3.2
+</div>
+<strong>Copyright &copy; 2014-2022 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+</footer>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/docs/3.2/assets/plugins/jquery/jquery.min.js"></script>
+<script src="/docs/3.2/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/docs/3.2/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/docs/3.2/assets/js/adminlte.min.js"></script>
+<script>
+  var toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+  var currentTheme = localStorage.getItem('theme');
+  var mainHeader = document.querySelector('.main-header');
+
+  if (currentTheme) {
+    if (currentTheme === 'dark') {
+      if (!document.body.classList.contains('dark-mode')) {
+        document.body.classList.add("dark-mode");
+      }
+      if (mainHeader.classList.contains('navbar-light')) {
+        mainHeader.classList.add('navbar-dark');
+        mainHeader.classList.remove('navbar-light');
+      }
+      toggleSwitch.checked = true;
+    }
+  }
+
+  function switchTheme(e) {
+    if (e.target.checked) {
+      if (!document.body.classList.contains('dark-mode')) {
+        document.body.classList.add("dark-mode");
+      }
+      if (mainHeader.classList.contains('navbar-light')) {
+        mainHeader.classList.add('navbar-dark');
+        mainHeader.classList.remove('navbar-light');
+      }
+      localStorage.setItem('theme', 'dark');
+    } else {
+      if (document.body.classList.contains('dark-mode')) {
+        document.body.classList.remove("dark-mode");
+      }
+      if (mainHeader.classList.contains('navbar-dark')) {
+        mainHeader.classList.add('navbar-light');
+        mainHeader.classList.remove('navbar-dark');
+      }
+      localStorage.setItem('theme', 'light');
+    }
+  }
+
+  toggleSwitch.addEventListener('change', switchTheme, false);
+</script>
+</body>
+</html>
