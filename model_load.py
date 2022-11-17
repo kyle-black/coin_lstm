@@ -193,7 +193,7 @@ def get_coin(pair, time):
 
 
 #################################
-)
+
 
 asset_list=['ADAUSD','BTCUSD','DOGEUSD', 'ETHUSD',  'HFTUSD','LTCUSD', 'MATICUSD','SHIBUSD', 'SOLUSD', 'XRPUSD']
 
