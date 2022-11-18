@@ -9,6 +9,8 @@ import requests
 import plotly_create
 import pandas as pd 
 import os
+import schedule
+import time
 #from model_load import get_coin
 
 app =Flask(__name__)
@@ -63,10 +65,11 @@ def fetch_price(coin_pair, time_):
 #@app.route('/home')
 def route_create():
    
+   
    coins_ = ['BTCUSD', 'ADAUSD', 'DOGEUSD', 'ETHUSD','LTCUSD','MATICUSD','SHIBUSD','SOLUSD','XRPUSD']
    time_series= ['5m', '15m', '30m', '1h']
 
-   
+      
    BTCUSD_5m, BTCUSD_5m_diff =fetch_price('BTCUSD', '5m')
    BTCUSD_5m,BTCUSD_15m_diff =fetch_price('BTCUSD', '15m')
    BTCUSD_30m,BTCUSD_30m_diff =fetch_price('BTCUSD', '30m')
@@ -92,7 +95,7 @@ def route_create():
    ETHUSD_30m,ETHUSD_30m_diff =fetch_price('ETHUSD', '30m')
    ETHUSD_1h,ETHUSD_1h_diff =fetch_price('ETHUSD', '1h')
 
-  
+   
 
 
    LTCUSD_5m, LTCUSD_5m_diff =fetch_price('LTCUSD', '5m')
@@ -118,29 +121,19 @@ def route_create():
    SOLUSD_30m,SOLUSD_30m_diff =fetch_price('SOLUSD', '30m')
    SOLUSD_1h,SOLUSD_1h_diff =fetch_price('SOLUSD', '1h')
 
-  
+   
 
    BTCUSD_5m, BTCUSD_5m_diff =fetch_price('BTCUSD', '5m')
    BTCUSD_5m,BTCUSD_15m_diff =fetch_price('BTCUSD', '15m')
    BTCUSD_30m,BTCUSD_30m_diff =fetch_price('BTCUSD', '30m')
    BTCUSD_1h,BTCUSD_1h_diff =fetch_price('BTCUSD', '1h')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
    diff_dict ={'BTCUSD_5m':BTCUSD_5m_diff,'BTCUSD_15m':BTCUSD_15m_diff,'BTCUSD_30m':BTCUSD_30m_diff,'BTCUSD_1h':BTCUSD_1h_diff, 'ADAUSD_5m':ADAUSD_5m_diff,'ADAUSD_15m':ADAUSD_15m_diff,'ADAUSD_30m':ADAUSD_30m_diff,'ADAUSD_1h':ADAUSD_1h_diff, 'DOGEUSD_5m':DOGEUSD_5m_diff,'DOGEUSD_15m':DOGEUSD_15m_diff,'DOGEUSD_30m':DOGEUSD_30m_diff,'DOGEUSD_1h':DOGEUSD_1h_diff, 'ETHUSD_5m':ETHUSD_5m_diff,'ETHUSD_15m':ETHUSD_15m_diff, 'ETHUSD_30m':ETHUSD_30m_diff,'ETHUSD_1h':ETHUSD_1h_diff,'LTCUSD_5m':LTCUSD_5m_diff,'LTCUSD_15m':LTCUSD_15m_diff,'LTCUSD_30m':LTCUSD_30m_diff,'LTCUSD_1h':LTCUSD_1h_diff, 'MATICUSD_5m':MATICUSD_5m_diff, 'MATICUSD_15m':MATICUSD_15m_diff,'MATICUSD_30m':MATICUSD_30m_diff,'MATICUSD_1h':MATICUSD_1h_diff, 'SHIBUSD_5m':SHIBUSD_1h_diff,'SHIBUSD_15m':SHIBUSD_15m_diff,'SHIBUSD_30m':SHIBUSD_30m_diff,'SHIBUSD_1h':SHIBUSD_1h_diff,'SOLUSD_5m':SOLUSD_5m_diff,'SOLUSD_15m':SOLUSD_15m_diff,'SOLUSD_30m':SOLUSD_30m_diff,'SOLUSD_1h':SOLUSD_1h_diff }
+      
    return diff_dict
+   #time.sleep(60)
+
+#schedule.every(1).minutes.do(route_create)
   # return render_template('index.html', diff_dict=diff_dict)
 @app.route('/')
 def home_page():

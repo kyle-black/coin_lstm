@@ -1,3 +1,4 @@
+protobuf == 3.19.5
 Flask==2.1.0
 requests==2.25.1
 gunicorn
@@ -28,5 +29,7 @@ urllib3
 
 tensorflow-cpu
 
+
+schedule
 
 
