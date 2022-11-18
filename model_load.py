@@ -167,7 +167,7 @@ def get_coin(pair, time):
     time_list= ['5m', '15m','30m', '1h']
     for time_ in time_list:
         coin_24 = cryptowatch1.get_ohlc(pair,time_)
-        coin_24['close'].to_csv(f'./trading-app/output_csv/{pair}/{pair}_{time_}_24h.csv', mode='w' )
+        coin_24['close'].to_csv(f'output_csv/{pair}/{pair}_{time_}_24h.csv', mode='w' )
 
     x=np.ravel(coin_predict)
     coin_predict = x[:24]
@@ -186,7 +186,7 @@ def get_coin(pair, time):
     coin_df['price'] = outlist 
     print('coin_df:',coin_df)
     #coin_df.to_csv(f'output_csv/BTCUSD/{pair}_{time}_LSTM.csv' )
-    coin_df.to_csv(f'./trading-app/output_csv/{pair}/{pair}_{time}_LSTM.csv', mode='w' )
+    coin_df.to_csv(f'output_csv/{pair}/{pair}_{time}_LSTM.csv', mode='w' )
 
     return predict_mean
 
