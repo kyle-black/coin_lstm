@@ -198,12 +198,12 @@ def get_coin(pair, time):
 asset_list=['ADAUSD','BTCUSD','DOGEUSD', 'ETHUSD',  'HFTUSD','LTCUSD', 'MATICUSD','SHIBUSD', 'SOLUSD', 'XRPUSD']
 
 for i in asset_list:
-    #try:
-    get_coin(i,'5m')
-    get_coin(i,'15m')
-    get_coin(i,'30m')
-    get_coin(i,'1h')
-   # except: print('not available')
+    try:
+        get_coin(i,'5m')
+        get_coin(i,'15m')
+        get_coin(i,'30m')
+        get_coin(i,'1h')
+    except: print('not available')
 
 
 
