@@ -28,5 +28,5 @@ urllib3
 
 tensorflow-cpu
 
-TA-Lib
+
 
