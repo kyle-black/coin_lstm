@@ -143,4 +143,4 @@ def get_ohlc(pair, period):
 #print(df)
 
 
-print(get_ohlc('BTCUSD', '30m'))
+#print(get_ohlc('BTCUSD', '30m'))

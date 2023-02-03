@@ -33,3 +33,6 @@ tensorflow-cpu
 schedule
 
 
+boto3
+
+

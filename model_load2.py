@@ -18,7 +18,6 @@ from sklearn.preprocessing import StandardScaler
 
 from datetime import datetime
 from statistics import mean
-import config
 
 
 
@@ -168,9 +167,7 @@ def get_coin(pair, time):
     time_list= ['5m', '15m','30m', '1h']
     for time_ in time_list:
         coin_24 = cryptowatch1.get_ohlc(pair,time_)
-        coin_24['close'].to_csv(f'{pair}/{pair}_{time_}_24h.csv', mode='w' )
-
-        config.s3.Bucket('coinprophet-101').upload_file(Filename=f'{pair}_{time_}_24h.csv', Key= '{pair}_{time_}_24h.csv')
+        coin_24['close'].to_csv(f'output_csv/{pair}/{pair}_{time_}_24h.csv', mode='w' )
 
     x=np.ravel(coin_predict)
     coin_predict = x[:24]
@@ -201,12 +198,12 @@ def get_coin(pair, time):
 asset_list=['ADAUSD','BTCUSD','DOGEUSD', 'ETHUSD',  'HFTUSD','LTCUSD', 'MATICUSD','SHIBUSD', 'SOLUSD', 'XRPUSD']
 
 for i in asset_list:
-    #try:
-    get_coin(i,'5m')
-    get_coin(i,'15m')
-    get_coin(i,'30m')
-    get_coin(i,'1h')
-    #except: print('not available')
+    try:
+        get_coin(i,'5m')
+        get_coin(i,'15m')
+        get_coin(i,'30m')
+        get_coin(i,'1h')
+    except: print('not available')
 
 
 
